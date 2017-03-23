@@ -28,7 +28,7 @@ var GameScreen = function(assetManager, stage) {
 	*/
 	/*
 	* This became redundant with my addSprite function.
-	* Please delet thwe surrounding comment if it has some greater purpose I did not notice.
+	* Please delete the surrounding comment if it has some greater purpose I did not notice.
 	while(index < numberOfGhosts) {
 		ghosts[index] = null;
 		ghostMover[index] = null;
@@ -42,7 +42,7 @@ var GameScreen = function(assetManager, stage) {
 	* 	// End game.
 	* } else {
 	*	// Continue game.
-	* 
+	* }
 	*/
 	function checkEmpty() {
 		var index = 0;

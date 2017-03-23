@@ -52,10 +52,19 @@ var GameScreen = function(assetManager, stage) {
     var btnQuit = assetManager.getSprite("uiAssets");
     btnQuit.gotoAndStop("previousUp");
     btnQuit.x = 0;
-    btnQuit.y = 270;
+    btnQuit.y = 260;
     btnQuit.buttonHelper = new createjs.ButtonHelper(btnQuit, "quitUp", "quitOver", "quitOver", false, hitAreaSprite, "hitArea");
     btnQuit.addEventListener("click",onQuit);
     screen.addChild(btnQuit);
+    
+   // add Play button
+    var btnPlay = assetManager.getSprite("uiAssets");
+    btnPlay.gotoAndStop("playUp");
+    btnPlay.x = 125;
+    btnPlay.y = 260;
+    btnPlay.buttonHelper = new createjs.ButtonHelper(btnPlay, "playUp", "playOver", "playOver", false, hitAreaSprite, "hitArea");
+    btnPlay.addEventListener("click", onPlay);
+    screen.addChild(btnPlay);
 	/*
 	This function will add a new sprite to the screen at the given coordinate and place the needed data in the arrays.
 	*/
@@ -91,6 +100,11 @@ var GameScreen = function(assetManager, stage) {
         // telling the world the prev button has been clicked!
         stage.dispatchEvent(eventScreenPrevious);
     }
+    
+    function onPlay(e){
+        console.log("Play has started!")
+    }
+    
     // ---------------------------------- public methods
     this.showMe = function() {
         // anything else that needs to be done when the screen is shown

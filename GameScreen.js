@@ -96,13 +96,13 @@ var GameScreen = function(assetManager, stage) {
 	* You was over-writing the sprites each row? You wasn't creating a new sprite for each row.
 	*/
     function onQuit(e){
-        console.log("clicked on prev!")
+        console.log("clicked on prev!");
         // telling the world the prev button has been clicked!
         stage.dispatchEvent(eventScreenPrevious);
     }
     
     function onPlay(e){
-        console.log("Play has started!")
+        console.log("Play has started!");
     }
     
     // ---------------------------------- public methods

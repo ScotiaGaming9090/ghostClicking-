@@ -54,7 +54,7 @@
 			timer.innerHTML = time.toFixed(1);
 		} else {
 			timer.innerHTML = "Game over!";
-			onPlayFinished();
+			endGame();
 		}
 	}
 	function stop() {
@@ -64,7 +64,11 @@
 		timer = timer + 1;
 		document.getElementById("time").innerHTML=timer;
 	}
-	
+	function endGame() {
+		ghosts = [];
+		ghostMover = [];
+		onPlayFinished();
+	}
 	function onInit() {
         console.log(">> initializing");
 

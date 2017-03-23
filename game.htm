@@ -21,5 +21,31 @@
         <script type="text/javascript" src="GameScreen.js"></script>
         <script type="text/javascript" src="Mover.js"></script>
         <script type="text/javascript" src="Game.js"></script>
+		<script>
+			var timer = document.getElementById("timer"),
+				time = 0,
+				timerFunction;
+			function start() {
+				time = 0;
+				timerFunction = setInterval(incrementTimer, 100);
+			}
+			function incrementTimer() {
+				time = time + 0.1;
+				if(time <= 5.0) {
+					timer.innerHTML = time.toFixed(1);
+				} else {
+					timer.innerHTML = "Game over!";
+					endGame();
+				}
+			}
+			function stop() {
+				clearInterval(timerFunction);
+			}
+			function endGame() {
+				ghosts = [];
+				ghostMover = [];
+				onPlayFinished();
+			}
+		</script>
 	</body>
 </html>

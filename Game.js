@@ -41,34 +41,7 @@
     
     
     // ------------------------------------------------------------ event handlers
-	var timer = document.getElementById("timer"),
-		time = 0,
-		timerFunction;
-	function start() {
-		time = 0;
-		timerFunction = setInterval(incrementTimer, 100);
-	}
-	function incrementTimer() {
-		time = time + 0.1;
-		if(time <= 5.0) {
-			timer.innerHTML = time.toFixed(1);
-		} else {
-			timer.innerHTML = "Game over!";
-			endGame();
-		}
-	}
-	function stop() {
-		clearInterval(timerFunction);
-	}
-	function onTimerUpdate() {
-		timer = timer + 1;
-		document.getElementById("time").innerHTML=timer;
-	}
-	function endGame() {
-		ghosts = [];
-		ghostMover = [];
-		onPlayFinished();
-	}
+	
 	function onInit() {
         console.log(">> initializing");
 

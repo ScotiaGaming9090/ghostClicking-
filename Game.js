@@ -41,7 +41,20 @@
     
     
     // ------------------------------------------------------------ event handlers
-	
+	var timer = document.getElementById("timer"),
+		time = 0,
+		timerFunction;
+	function start() {
+		time = 0;
+		timerFunction = setInterval(incrementTimer, 100);
+	}
+	function incrementTimer() {
+		time = time + 0.1;
+		timer.innerHTML = time.toFixed(1);
+	}
+	function stop() {
+		clearInterval(timerFunction);
+	}
 	function onTimerUpdate() {
 		timer = timer + 1;
 		document.getElementById("time").innerHTML=timer;

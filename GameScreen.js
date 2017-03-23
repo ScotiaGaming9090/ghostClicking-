@@ -1,22 +1,17 @@
 var GameScreen = function(assetManager, stage) {
     // On this screen the player has exactly five seconds to beat the clock
     "use strict";
-    
     // custom event for next button
     var eventScreenComplete = new createjs.Event("playFinished");
     var eventScreenPrevious = new createjs.Event("playPrevious");
     // construct container to hold all sprites of screen
     var screen = new createjs.Container();
-    
-    
     // add background to screen
     var background = assetManager.getSprite("uiAssets");
     background.gotoAndStop("gameScreen");
     screen.addChild(background);
-    
     // construct hitspot sprite
     var hitAreaSprite = assetManager.getSprite("uiAssets");
-	
 	var ghosts = [],
 		ghostMover = [],
 		numberOfGhosts = 8, // Not needed? See comment below.
@@ -53,7 +48,6 @@ var GameScreen = function(assetManager, stage) {
 		}
 		return true; // Only reached if all indices are null.
 	}
-    
     // add quit button
     var btnQuit = assetManager.getSprite("uiAssets");
     btnQuit.gotoAndStop("previousUp");
@@ -62,7 +56,6 @@ var GameScreen = function(assetManager, stage) {
     btnQuit.buttonHelper = new createjs.ButtonHelper(btnQuit, "quitUp", "quitOver", "quitOver", false, hitAreaSprite, "hitArea");
     btnQuit.addEventListener("click",onQuit);
     screen.addChild(btnQuit);
-    
 	/*
 	This function will add a new sprite to the screen at the given coordinate and place the needed data in the arrays.
 	*/
@@ -93,16 +86,11 @@ var GameScreen = function(assetManager, stage) {
 	* I'm not sure if the above is correct.
 	* You was over-writing the sprites each row? You wasn't creating a new sprite for each row.
 	*/
-        
     function onQuit(e){
         console.log("clicked on prev!")
         // telling the world the prev button has been clicked!
         stage.dispatchEvent(eventScreenPrevious);
     }
-    
-
-    
-    
     // ---------------------------------- public methods
     this.showMe = function() {
         // anything else that needs to be done when the screen is shown
@@ -110,21 +98,13 @@ var GameScreen = function(assetManager, stage) {
         stage.addChild(screen);
         //stage.addChild(ghost1)
     }
-    
     this.hideMe = function() {
         stage.removeChild(screen);
        
     } 
-    
     function onTick(e) {
-
 		ghostMover1.updateMe();
-
 		// update the stage!
 		stage.update();
 	}
-
-    
-    
-    
 };

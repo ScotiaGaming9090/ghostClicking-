@@ -50,7 +50,12 @@
 	}
 	function incrementTimer() {
 		time = time + 0.1;
-		timer.innerHTML = time.toFixed(1);
+		if(time <= 5.0) {
+			timer.innerHTML = time.toFixed(1);
+		} else {
+			timer.innerHTML = "Game over!";
+			onPlayFinished();
+		}
 	}
 	function stop() {
 		clearInterval(timerFunction);

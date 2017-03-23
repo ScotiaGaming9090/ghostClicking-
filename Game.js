@@ -17,7 +17,7 @@
     var contentScreen = null;
     var endScreen = null;
     var gameScreen = null;
-    var gameOverScreen = null
+    var gameOverScreen = null;
     
     // timer variables
     var timer = null;

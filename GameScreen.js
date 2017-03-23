@@ -16,11 +16,43 @@ var GameScreen = function(assetManager, stage) {
     
     // construct hitspot sprite
     var hitAreaSprite = assetManager.getSprite("uiAssets");
-    
-    var ghost1,ghost2,ghost3,ghost4,ghost5,ghost6,ghost7,ghost8 = null;
-    var ghostMover1,ghostMover2,ghostMover3,ghostMover4,ghostMover5,ghostMover6,ghostMover7,ghostMover8 = null;
-    
-
+	
+	var ghosts = [],
+		ghostMover = [],
+		numberOfGhosts = 8, // Not needed? See comment below.
+		index = 0;
+	/*
+	* Ghosts are now stored in an array.
+	* Your previous "ghost1" is now accessed by ghosts[0].
+	* Your ghostMovers are stored in "ghostMover[index]", with the index being the same as ghosts index.
+	*/
+	/*
+	* This became redundant with my addSprite function.
+	* Please delet thwe surrounding comment if it has some greater purpose I did not notice.
+	while(index < numberOfGhosts) {
+		ghosts[index] = null;
+		ghostMover[index] = null;
+		index = index + 1;
+	}
+	*/
+	/*
+	* This function will check if the ghosts array is empty.
+	* Usage:
+	* if(checkEmpty() == true) {
+	* 	// End game.
+	* } else {
+	*	// Continue game.
+	* 
+	*/
+	function checkEmpty() {
+		var index = 0;
+		while(index < ghosts.length) {
+			if(ghosts[index] != null) { // The current index null.
+				return false;
+			}
+		}
+		return true; // Only reached if all indices are null.
+	}
     
     // add quit button
     var btnQuit = assetManager.getSprite("uiAssets");
@@ -31,117 +63,36 @@ var GameScreen = function(assetManager, stage) {
     btnQuit.addEventListener("click",onQuit);
     screen.addChild(btnQuit);
     
-    // ROW ONE 
-    ghost1 = assetManager.getSprite("uiAssets");
-    ghost1.x = 10;
-    ghost1.y = 10;
-    ghost1.gotoAndStop("ghostAlive");
-    // ADDED TO THE STAGE!!!!!
-    screen.addChild(ghost1);
-    ghostMover1 = new Mover(ghost1,stage);
-    ghostMover1.startMe();
-
-    ghost2 = assetManager.getSprite("uiAssets");
-    ghost2.x = 80;
-    ghost2.y = 10;
-    ghost2.gotoAndStop("ghostAlive");
-    // ADDED TO THE STAGE!!!!!
-    screen.addChild(ghost2);
-    ghostMover2 = new Mover(ghost2,stage);
-    ghostMover2.startMe();
-
-    ghost3 = assetManager.getSprite("uiAssets");
-    ghost3.x = 150;
-    ghost3.y = 10;
-    ghost3.gotoAndStop("ghostAlive");
-    // ADDED TO THE STAGE!!!!!
-    screen.addChild(ghost3);
-    ghostMover3 = new Mover(ghost3,stage);
-    ghostMover3.startMe();
-
-    ghost4 = assetManager.getSprite("uiAssets");
-    ghost4.x = 220;
-    ghost4.y = 10;
-    ghost4.gotoAndStop("ghostAlive");
-    // ADDED TO THE STAGE!!!!!
-    screen.addChild(ghost4);
-    ghostMover4 = new Mover(ghost4,stage);
-    ghostMover4.startMe();
-    
-    // ROW TWO
-    ghost5 = assetManager.getSprite("uiAssets");
-    ghost5.x = 10;
-    ghost5.y = 80;
-    ghost5.gotoAndStop("ghostAlive");
-    // ADDED TO THE STAGE!!!!!
-    screen.addChild(ghost5);
-    ghostMover2 = new Mover(ghost5,stage);
-    ghostMover2.startMe();
-
-    ghost2 = assetManager.getSprite("uiAssets");
-    ghost2.x = 80;
-    ghost2.y = 80;
-    ghost2.gotoAndStop("ghostAlive");
-    // ADDED TO THE STAGE!!!!!
-    screen.addChild(ghost2);
-    ghostMover2 = new Mover(ghost2,stage);
-    ghostMover2.startMe();
-
-    ghost3 = assetManager.getSprite("uiAssets");
-    ghost3.x = 150;
-    ghost3.y = 80;
-    ghost3.gotoAndStop("ghostAlive");
-    // ADDED TO THE STAGE!!!!!
-    screen.addChild(ghost3);
-    ghostMover3 = new Mover(ghost3,stage);
-    ghostMover3.startMe();
-
-    ghost4 = assetManager.getSprite("uiAssets");
-    ghost4.x = 220;
-    ghost4.y = 80;
-    ghost4.gotoAndStop("ghostAlive");
-    // ADDED TO THE STAGE!!!!!
-    screen.addChild(ghost4);
-    ghostMover4 = new Mover(ghost4,stage);
-    ghostMover4.startMe();
-    
-    // ROW THREE
-    ghost5 = assetManager.getSprite("uiAssets");
-    ghost5.x = 10;
-    ghost5.y = 150;
-    ghost5.gotoAndStop("ghostAlive");
-    // ADDED TO THE STAGE!!!!!
-    screen.addChild(ghost5);
-    ghostMover2 = new Mover(ghost5,stage);
-    ghostMover2.startMe();
-
-    ghost2 = assetManager.getSprite("uiAssets");
-    ghost2.x = 80;
-    ghost2.y = 150;
-    ghost2.gotoAndStop("ghostAlive");
-    // ADDED TO THE STAGE!!!!!
-    screen.addChild(ghost2);
-    ghostMover2 = new Mover(ghost2,stage);
-    ghostMover2.startMe();
-
-    ghost3 = assetManager.getSprite("uiAssets");
-    ghost3.x = 150;
-    ghost3.y = 150;
-    ghost3.gotoAndStop("ghostAlive");
-    // ADDED TO THE STAGE!!!!!
-    screen.addChild(ghost3);
-    ghostMover3 = new Mover(ghost3,stage);
-    ghostMover3.startMe();
-
-    ghost4 = assetManager.getSprite("uiAssets");
-    ghost4.x = 220;
-    ghost4.y = 150;
-    ghost4.gotoAndStop("ghostAlive");
-    // ADDED TO THE STAGE!!!!!
-    screen.addChild(ghost4);
-    ghostMover4 = new Mover(ghost4,stage);
-    ghostMover4.startMe();
-    
+	/*
+	This function will add a new sprite to the screen at the given coordinate and place the needed data in the arrays.
+	*/
+	function addSprite(x, y) {
+		"use strict";
+		var ghostIndex = ghosts.length;
+		ghosts[ghostIndex] = assetManager.getSprite("uiAssets");
+		ghostMover[ghostIndex] = new Mover(ghosts[ghostIndex], stage);
+		ghosts[ghostIndex].x = x;
+		ghosts[ghostIndex].y = y;
+		ghosts[ghostIndex].gotoAndStop("ghostAlive");
+		screen.addChild(ghosts[ghostIndex]);
+		ghostMover[ghostIndex].startMe();
+	}
+	addSprite(10, 10); // Index 0.
+	addSprite(80, 10); // Index 1.
+	addSprite(150, 10); // Index 2.
+	addSprite(220, 10); // Index 3.
+	addSprite(10, 80); // Index 4.
+	addSprite(80, 80); // Index 5.
+	addSprite(150, 80); // Index 6.
+	addSprite(220, 80); // Index 7.
+	addSprite(10, 150); // Index 8.
+	addSprite(80, 150); // Index 9.
+	addSprite(150, 150); // Index 10.
+	addSprite(220, 150); // Index 11.
+	/*
+	* I'm not sure if the above is correct.
+	* You was over-writing the sprites each row? You wasn't creating a new sprite for each row.
+	*/
         
     function onQuit(e){
         console.log("clicked on prev!")

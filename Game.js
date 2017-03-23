@@ -1,3 +1,23 @@
+class sprite {
+	constructor(x, y, index) {
+		this.x = x;
+		this.y = y;
+		this.index = index;
+		ghosts[index] = assetManager.getSprite("uiAssets");
+		ghostMover[index] = new Mover(ghosts[index], stage);
+		ghosts[index].x = x;
+		ghosts[index].y = y;
+		ghosts[index].gotoAndStop("ghostAlive");
+		screen.addChild(ghosts[index]);
+		ghostMover[index].startMe();
+	}
+	function die() {
+		ghosts[this.index] = null;
+		ghostMover[this.index] = null;
+	}
+}
+
+
 (function() {
     "use strict";
 

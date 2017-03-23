@@ -6,7 +6,7 @@
     // game variables
     var stage = null;
     var canvas = null;
-    
+    var timer = 0;
 
     // frame rate of game
     var frameRate = 24;
@@ -41,8 +41,13 @@
     
     
     // ------------------------------------------------------------ event handlers
-    
-    function onInit() {
+	
+	function onTimerUpdate() {
+		timer = timer + 1;
+		document.getElementById("time").innerHTML=timer;
+	}
+	
+	function onInit() {
         console.log(">> initializing");
 
         // get reference to canvas
